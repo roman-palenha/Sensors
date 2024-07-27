@@ -1,0 +1,25 @@
+<div *ngIf="!selectedGroup" class="group-container">
+  <div class="group-card" *ngFor="let group of groups" (click)="selectGroup(group)">
+    <mat-card>
+      <mat-card-content>{{ group | titlecase }}</mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div *ngIf="selectedGroup">
+  <button mat-raised-button color="primary" (click)="backToGroups()">Back to Groups</button>
+  <div class="sensors-container">
+    <div class="sensor-card" *ngFor="let sensor of sensors">
+      <mat-card>
+        <mat-card-title style="text-align: center;">{{ sensor.groupName }}</mat-card-title>
+        <mat-card-content>
+          <div>Temperature: {{ sensor.waterTemperature }}°C</div>
+          <mat-progress-bar mode="determinate" [value]="sensor.waterTemperature" max="30"></mat-progress-bar>
+          <div *ngFor="let fish of sensor.fishSpecies">
+            {{ fish.speciesName }}: {{ fish.count }}
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

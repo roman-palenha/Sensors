@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+    <span>Sensor Dashboard</span>
+    <span class="spacer"></span>
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item [routerLink]="['/scanners']">Scanners</button>
+      <button mat-menu-item [routerLink]="['/statistics']">Statistics</button>
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+  

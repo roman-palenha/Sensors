@@ -1,0 +1,32 @@
+.group-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 16px;
+}
+
+.group-card {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.group-card:hover {
+  transform: scale(1.05);
+}
+
+.sensors-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 16px;
+}
+
+.sensor-card {
+  display: flex;
+  height: 150px;
+  flex-direction: column;
+}
+
+button {
+  margin-bottom: 16px;
+}

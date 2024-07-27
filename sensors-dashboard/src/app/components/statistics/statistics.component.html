@@ -1,0 +1,78 @@
+<div class="statistics-container">
+  <mat-card class="general-statistics">
+    <mat-card-header>
+      <mat-card-title>General Statistics</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="date-time-picker">
+        <mat-form-field appearance="fill">
+          <mat-label>Start Date</mat-label>
+          <input matInput [matDatepicker]="startPicker" [(ngModel)]="startDate">
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Start Time</mat-label>
+          <input matInput type="time" [(ngModel)]="startTime">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>End Date</mat-label>
+          <input matInput [matDatepicker]="endPicker" [(ngModel)]="endDate">
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>End Time</mat-label>
+          <input matInput type="time" [(ngModel)]="endTime">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="updateStatistics()">Update</button>
+      </div>
+      <div>Average Temperature: {{ averageTemperature }}°C</div>
+      <div>
+        <h3>Top 5 Fish Species</h3>
+        <table mat-table [dataSource]="topFishSpecies" class="mat-elevation-z8">
+          <ng-container matColumnDef="speciesName">
+            <th mat-header-cell *matHeaderCellDef>Species</th>
+            <td mat-cell *matCellDef="let element">{{ element.speciesName }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="count">
+            <th mat-header-cell *matHeaderCellDef>Count</th>
+            <td mat-cell *matCellDef="let element">{{ element.count }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['speciesName', 'count']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['speciesName', 'count'];"></tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="group-statistics">
+    <mat-card *ngFor="let group of groupStatistics" class="group-card">
+      <mat-card-header>
+        <mat-card-title>{{ group.name | titlecase }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div>Average Temperature: {{ group.averageTemperature }}°C</div>
+        <div>
+          <h3>Top 3 Fish Species</h3>
+          <table mat-table [dataSource]="group.topFishSpecies" class="mat-elevation-z8 inner-table">
+            <ng-container matColumnDef="speciesName">
+              <th mat-header-cell *matHeaderCellDef>Species</th>
+              <td mat-cell *matCellDef="let fish">{{ fish.speciesName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="count">
+              <th mat-header-cell *matHeaderCellDef>Count</th>
+              <td mat-cell *matCellDef="let fish">{{ fish.count }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['speciesName', 'count']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['speciesName', 'count'];"></tr>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
